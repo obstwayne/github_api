@@ -1,1 +1,1 @@
-test api for GitHub to get user repo
+simple test api for GitHub to get user repo
