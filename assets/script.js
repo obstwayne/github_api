@@ -1,10 +1,34 @@
 $(document).ready(function() {
+    function loadUsersHistory() {
+        let history = JSON.parse(localStorage.getItem('usersHistory')) || [];
+        let historyOutput = '<strong>Last searched:</strong><ul>';
+        history.forEach(username => {
+            historyOutput += `<li>${username}</li>`;
+        });
+        historyOutput += '</ul>';
+        $('#search-history').html(historyOutput);
+    }
+
+    loadUsersHistory();
+    
     $('#search-repos-button').click(function() {
         let username = $('#username').val().trim();
         if (username === '') {
             alert('Please enter a valid GitHub username');
             return;
         }
+
+        let history = JSON.parse(localStorage.getItem('usersHistory')) || [];
+
+        if (!history.includes(username)) {
+            history.unshift(username);
+            if (history.length > 5) {
+                history.pop();
+            }
+            localStorage.setItem('usersHistory', JSON.stringify(history));
+        }
+
+        loadUsersHistory();
 
         $.getJSON('api.php?user=' + username, function(data) {
             if (data.message) {

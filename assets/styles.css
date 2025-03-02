@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.repos-data {
+    width: 25%;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.content {
+    width: 70%;
+}
+
+.users-list-block {
+    width: 25%;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.history-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.history-box li {
+    margin-bottom: 5px;
+    cursor: pointer;
+    color: blue;
+}
