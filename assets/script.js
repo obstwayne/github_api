@@ -36,6 +36,18 @@ $(document).ready(function() {
                 return;
             }
 
+            if (Array.isArray(data) && data.length > 0) {
+                let history = JSON.parse(localStorage.getItem('usersHistory')) || [];
+                if (!history.includes(username)) {
+                    history.unshift(username);
+                    if (history.length > 5) {
+                        history.pop();
+                    }
+                    localStorage.setItem('usersHistory', JSON.stringify(history));
+                    loadUsersHistory();
+                }
+            
+
             let output = '<ul>';
             console.log('Api answer:', data);
 
@@ -58,6 +70,9 @@ $(document).ready(function() {
             
             output += '</ul>';
             $('#list-of-repos').html(output);
+        } else {
+            $('#list-of-repos').html('<p>No repositories found for this user.</p>');
+        }
         }).fail(function() {
             $('#list-of-repos').html(`<p>AJAX error: ${textStatus} - ${errorThrown}</p>`);
         });
